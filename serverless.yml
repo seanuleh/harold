@@ -1,8 +1,10 @@
+org: rdiao
+app: harold
 service: harold-question-bot
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs10.x
   profile: default
 
 functions:
