@@ -11,10 +11,10 @@ module.exports.run = (event, context) => {
     "U7G33RG22" // -> brunna
   ];
 
-  const SLACK_CHANNEL_ID = "";
-  const GROUP_INFO_URL = 'https://slack.com/api/groups.info';
-  const WEBHOOK_URL = 'https://hooks.slack.com/services/xxx/xxx/xxx';
-  const TOKEN = "";
+  const U30_SLACK_CHANNEL_ID = process.env.U30_SLACK_CHANNEL_ID;
+  const GROUP_INFO_URL = process.env.GROUP_INFO_URL;
+  const U30_WEBHOOK_URL = process.env.U30_WEBHOOK_URL;
+  const OAUTH_TOKEN = process.env.OAUTH_TOKEN;
 
   var getRandomUser = function() {
 
@@ -29,8 +29,8 @@ module.exports.run = (event, context) => {
         "content-type": "multipart/form-data"
       },
       form: {
-        token: TOKEN,
-        channel: SLACK_CHANNEL_ID
+        token: OAUTH_TOKEN,
+        channel: U30_SLACK_CHANNEL_ID
       }
     };
 
@@ -52,6 +52,7 @@ module.exports.run = (event, context) => {
   }
 
   var getRandomQuestion = function(questionArr) {
+    console.log("getRandomQuestion - START")
 
     return new Promise(function(resolve, reject) {
       var filename = "questions.txt"
@@ -71,6 +72,7 @@ module.exports.run = (event, context) => {
   }
 
   var createDirectedQuestion = function(questionArr) {
+    console.log("createDirectedQuestion - START")
 
     var memberId = questionArr[0];
     var line = questionArr[1];
@@ -89,7 +91,7 @@ module.exports.run = (event, context) => {
     console.log("[postMessage] postString: " + postString);
     const options = {
       method: 'POST',
-      uri: WEBHOOK_URL,
+      uri: U30_WEBHOOK_URL,
       body: {
         text: postString
       },
@@ -102,7 +104,7 @@ module.exports.run = (event, context) => {
       })
   }
 
-  // Let's go Harold!
+  // Let's go Harold!\
   getRandomUser()
     .then(getRandomQuestion)
     .then(createDirectedQuestion)
