@@ -38,3 +38,6 @@ To deploy harold, configure serverless credentials locally and then run:
 ## Secrets
 
 This is a quick and dirty script, there is no secrets management here. As such, secrets are removed during git commits and will need to be manually updated when doing a serverless deploy. Before performing a `sls deploy` please ensure you have updated the `TOKEN` and `WEBHOOK_URL` variables in the top of `handler.js` (and `ID_checker.js`)
+
+## Notes
+TOKEN constant is the Oauth token
